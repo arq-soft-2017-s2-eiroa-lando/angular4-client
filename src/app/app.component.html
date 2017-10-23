@@ -1,13 +1,28 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-
-  <div>
-    <ng-container *ngFor="let subject of subjects">
-      <h2>{{subject.name}}</h2>
-    </ng-container>
+  <h1>Inscripciones</h1>
+  <div *ngIf="student">
+    {{student.name}}
+    <!-- {{student.studentFileNumber}} -->
+    <!-- {{student.approvedSubjects[0].name}} -->
   </div>
+
+  <div *ngIf="student">
+    <div *ngFor="let s of student.subjects">
+      <div *ngIf="! s.approved">
+        <div class="card">
+          <div class="card-block">
+            <h4 class="card-title">{{s.name}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Horarios: ...</h6>
+            <p class="card-text">Info adicional...</p>
+            <button *ngIf="!s.subscribed" (click)="subscribe(s)" type="button" class="btn btn-primary">Inscribir</button>
+            <button *ngIf="s.subscribed" (click)="unsubscribe(s)" type="button" class="btn btn-danger">Desuscribir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 </div>

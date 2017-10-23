@@ -1,31 +1,29 @@
-import { Component } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Component, OnInit } from '@angular/core';
+import { StudentsService } from './service/students.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
-  private apiUrl = 'http://localhost:8080/subjects';
-  subjects: any = [];
+  student: any;
 
-  constructor(private http: Http) {
-    this.getSubjects();
+  constructor(
+    private studentsService: StudentsService
+  ){ }
+
+  ngOnInit(): void {
+    this.studentsService.getStudent().then(s=> this.student = s);
   }
 
-  getData() {
-    return this.http.get(this.apiUrl).map((res: Response) => res.json() );
+  subscribe(subject){
+    this.studentsService.subscribe(this.student, subject).then( () => subject.subscribed = true);
   }
 
-  getSubjects() {
-    this.getData().subscribe(data => {
-        console.log(data);
-        this.subjects = data;
-    });
+  unsubscribe(subject){
+    this.studentsService.unsubscribe(this.student, subject).then( () => subject.subscribed = false);
   }
 
 }
