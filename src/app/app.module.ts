@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-import { StudentsService } from './service/students.service';
+import { SurveyService } from './service/surveys.service';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { StudentsService } from './service/students.service';
     HttpModule
   ],
   providers: [
-    StudentsService,
+    SurveyService,
     AppComponent
   ],
   bootstrap: [AppComponent]

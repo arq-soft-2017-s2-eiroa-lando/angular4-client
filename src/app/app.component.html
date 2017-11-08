@@ -1,28 +1,125 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>Encuesta de intención de inscripción.</h1>
-  <div *ngIf="student">
-    {{student.name}}
-    <!-- {{student.studentFileNumber}} -->
-    <!-- {{student.approvedSubjects[0].name}} -->
+<div class="container-fluid">
+  <div class="text-center">
+    <h1>Encuesta de intención de inscripción.</h1>
+    <h2 class="text-muted">1er cuatrimestre 2018</h2>
+    <p>Esta encuesta tiene como objetivo ..... </p>
+    <br /><br />
   </div>
-
-  <div *ngIf="student">
-    <div *ngFor="let s of student.subjects">
-      <div *ngIf="! s.approved">
-        <div class="card">
-          <div class="card-block">
-            <h4 class="card-title">{{s.name}}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Horarios: ...</h6>
-            <p class="card-text">Info adicional...</p>
-            <button *ngIf="!s.subscribed" (click)="subscribe(s)" type="button" class="btn btn-primary">Inscribir</button>
-            <button *ngIf="s.subscribed" (click)="unsubscribe(s)" type="button" class="btn btn-danger">Desuscribir</button>
-          </div>
+  <div class="row justify-content-center">
+    <div class="col-6 card">
+      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
+      <div class="card-block row">
+        <!--  offset-md-1 to separate columns-->
+        <div class="alert alert-info col">
+            <p class="font-weight-bold text-center">Comision 1</p>
+            <div>
+              <p>Lunes 11:00hs - 14:00hs</p>
+              <p>Martes 11:00hs - 14:40hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
         </div>
+        <div class="alert alert-info col">
+            <div>
+              <p class="font-weight-bold text-center">Comision 2</p>
+              <p>Martes 18:00hs - 19:00hs</p>
+              <p>Jueves 19:00hs - 21:30hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+      </div>
+      <div class="card-footer dropdown row justify-content-center">
+        <form class="row justify-content-center">
+            <div class="selectWrapper">
+              <select>
+                <option>Ya aprobé </option>
+                <option>Cursaría en C1</option>
+                <option>Cursaría en C2</option>
+                <option>Cursaría pero no puedo</option>
+                <option>No voy a cursar</option>
+              </select>
+            </div>
+        </form>
       </div>
     </div>
   </div>
+  <br /><br />
 
 
+  <div class="row justify-content-center">
+    <div class="col-6 card">
+      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
+      <div class="card-block row">
+        <!--  offset-md-1 to separate columns-->
+        <div class="alert alert-info col">
+            <p class="font-weight-bold text-center">Comision 1</p>
+            <div>
+              <p>Lunes 11:00hs - 14:00hs</p>
+              <p>Martes 11:00hs - 14:40hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+      </div>
+      <div class="card-footer dropdown row justify-content-center">
+        <form class="row justify-content-center">
+            <div class="selectWrapper">
+              <select>
+                <option>Ya aprobé </option>
+                <option>Cursaría en C1</option>
+                <option>Cursaría en C2</option>
+                <option>Cursaría pero no puedo</option>
+                <option>No voy a cursar</option>
+              </select>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br /><br />
 
+  <div class="row justify-content-center">
+    <div class="col-6 card">
+      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
+      <div class="card-block row">
+        <!--  offset-md-1 to separate columns-->
+        <div class="alert alert-info col">
+            <p class="font-weight-bold text-center">Comision 1</p>
+            <div>
+              <p>Lunes 11:00hs - 14:00hs</p>
+              <p>Martes 11:00hs - 14:40hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+        <div class="alert alert-info col">
+            <div>
+              <p class="font-weight-bold text-center">Comision 2</p>
+              <p>Martes 18:00hs - 19:00hs</p>
+              <p>Jueves 19:00hs - 21:30hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+        <div class="alert alert-info col">
+            <div>
+              <p class="font-weight-bold text-center">Comision 2</p>
+              <p>Martes 18:00hs - 19:00hs</p>
+              <p>Jueves 19:00hs - 21:30hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+      </div>
+      <div class="card-footer dropdown row justify-content-center">
+        <form class="row justify-content-center">
+            <div class="selectWrapper">
+              <select>
+                <option>Ya aprobé </option>
+                <option>Cursaría en C1</option>
+                <option>Cursaría en C2</option>
+                <option>Cursaría pero no puedo</option>
+                <option>No voy a cursar</option>
+              </select>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br /><br />
 </div>
