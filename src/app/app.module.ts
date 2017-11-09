@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { SurveyService } from './service/surveys.service';
 
-
 @NgModule({
   declarations: [
     AppComponent

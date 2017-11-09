@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.surveyService.getSurvey().then(s=> this.survey = s);
+    this.survey = this.surveyService.getSurvey();
   }
 
+  submitSurvey(): void {
+    console.log("Survey submitted")
+  }
 }

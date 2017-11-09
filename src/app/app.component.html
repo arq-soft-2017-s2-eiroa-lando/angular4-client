@@ -1,125 +1,77 @@
 <div class="container-fluid">
   <div class="text-center">
-    <h1>Encuesta de intención de inscripción.</h1>
-    <h2 class="text-muted">1er cuatrimestre 2018</h2>
-    <p>Esta encuesta tiene como objetivo ..... </p>
-    <br /><br />
+    <h1>{{survey.title}}</h1>
+    <h2 class="text-muted">{{survey.period}}</h2>
+    <p>{{survey.comment}}</p>
+    <br />
   </div>
-  <div class="row justify-content-center">
-    <div class="col-6 card">
-      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
+
+  <div class="row justify-content-center" style="margin-bottom: 20px;" *ngFor="let subject of survey.subjects">
+    <div class="col-md-6 col-sm-12 card">
+      <div class="card-header text-center"><h4>{{subject.name}}</h4></div>
       <div class="card-block row">
-        <!--  offset-md-1 to separate columns-->
-        <div class="alert alert-info col">
-            <p class="font-weight-bold text-center">Comision 1</p>
-            <div>
-              <p>Lunes 11:00hs - 14:00hs</p>
-              <p>Martes 11:00hs - 14:40hs</p>
+        <div class="alert alert-info col" *ngFor="let class of subject.classes">
+            <p class="font-weight-bold text-center">{{class.name}}</p>
+            <div *ngFor="let s of class.schedule">
+              <p>{{s.day}} {{s.time}}</p>
             </div>
-            <p>Profesores: Fidel, Eduardo.
+              Profesores: {{class.teachers}}
         </div>
-        <div class="alert alert-info col">
-            <div>
-              <p class="font-weight-bold text-center">Comision 2</p>
-              <p>Martes 18:00hs - 19:00hs</p>
-              <p>Jueves 19:00hs - 21:30hs</p>
-            </div>
-            <p>Profesores: Fidel, Eduardo.
         </div>
-      </div>
       <div class="card-footer dropdown row justify-content-center">
-        <form class="row justify-content-center">
+        <div class="row justify-content-center">
             <div class="selectWrapper">
               <select>
-                <option>Ya aprobé </option>
-                <option>Cursaría en C1</option>
-                <option>Cursaría en C2</option>
-                <option>Cursaría pero no puedo</option>
-                <option>No voy a cursar</option>
+                <option value="placeholder">Seleccionar opción</option>
+                <option *ngFor="let option of subject.options">{{option}}</option>
               </select>
             </div>
-        </form>
+          </div>
       </div>
     </div>
   </div>
-  <br /><br />
 
-
+  <br />
   <div class="row justify-content-center">
-    <div class="col-6 card">
-      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
-      <div class="card-block row">
-        <!--  offset-md-1 to separate columns-->
-        <div class="alert alert-info col">
-            <p class="font-weight-bold text-center">Comision 1</p>
-            <div>
-              <p>Lunes 11:00hs - 14:00hs</p>
-              <p>Martes 11:00hs - 14:40hs</p>
-            </div>
-            <p>Profesores: Fidel, Eduardo.
-        </div>
-      </div>
-      <div class="card-footer dropdown row justify-content-center">
-        <form class="row justify-content-center">
-            <div class="selectWrapper">
-              <select>
-                <option>Ya aprobé </option>
-                <option>Cursaría en C1</option>
-                <option>Cursaría en C2</option>
-                <option>Cursaría pero no puedo</option>
-                <option>No voy a cursar</option>
-              </select>
-            </div>
-        </form>
-      </div>
-    </div>
+    <button type="button" class="btn-primary btn-lg" (click)="submitSurvey()">Submit</button>
   </div>
-  <br /><br />
-
-  <div class="row justify-content-center">
-    <div class="col-6 card">
-      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
-      <div class="card-block row">
-        <!--  offset-md-1 to separate columns-->
-        <div class="alert alert-info col">
-            <p class="font-weight-bold text-center">Comision 1</p>
-            <div>
-              <p>Lunes 11:00hs - 14:00hs</p>
-              <p>Martes 11:00hs - 14:40hs</p>
-            </div>
-            <p>Profesores: Fidel, Eduardo.
-        </div>
-        <div class="alert alert-info col">
-            <div>
-              <p class="font-weight-bold text-center">Comision 2</p>
-              <p>Martes 18:00hs - 19:00hs</p>
-              <p>Jueves 19:00hs - 21:30hs</p>
-            </div>
-            <p>Profesores: Fidel, Eduardo.
-        </div>
-        <div class="alert alert-info col">
-            <div>
-              <p class="font-weight-bold text-center">Comision 2</p>
-              <p>Martes 18:00hs - 19:00hs</p>
-              <p>Jueves 19:00hs - 21:30hs</p>
-            </div>
-            <p>Profesores: Fidel, Eduardo.
-        </div>
-      </div>
-      <div class="card-footer dropdown row justify-content-center">
-        <form class="row justify-content-center">
-            <div class="selectWrapper">
-              <select>
-                <option>Ya aprobé </option>
-                <option>Cursaría en C1</option>
-                <option>Cursaría en C2</option>
-                <option>Cursaría pero no puedo</option>
-                <option>No voy a cursar</option>
-              </select>
-            </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <br /><br />
 </div>
+
+  <!-- <div class="row justify-content-center" >
+    <div class="col-md-6 col-sm-12 card">
+      <div class="card-header text-center"><h4>Introduccion a la programación</h4></div>
+      <div class="card-block row">
+        <div class="alert alert-info col">
+            <p class="font-weight-bold text-center">Comision 1</p>
+            <div>
+              <p>Lunes 11:00hs - 14:00hs</p>
+              <p>Martes 11:00hs - 14:40hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+        <div class="alert alert-info col">
+            <div>
+              <p class="font-weight-bold text-center">Comision 2</p>
+              <p>Martes 18:00hs - 19:00hs</p>
+              <p>Jueves 19:00hs - 21:30hs</p>
+            </div>
+            <p>Profesores: Fidel, Eduardo.
+        </div>
+      </div>
+      <div class="card-footer dropdown row justify-content-center">
+        <div class="row justify-content-center">
+            <div class="selectWrapper ">
+              <select>
+                <option value="placeholder">Seleccionar opción</option>
+                <option>Ya aprobé</option>
+                <option>Cursaría en C1</option>
+                <option>Cursaría en C2</option>
+                <option>Cursaría pero no puedo</option>
+                <option>No voy a cursar</option>
+              </select>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <br /><br /> -->
