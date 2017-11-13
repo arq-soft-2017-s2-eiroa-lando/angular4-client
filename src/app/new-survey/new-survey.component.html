@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+
+    <form class="col-6">
+      <div class="form-group">
+        <label><b>Período</b></label>
+        <input required type="text" class="form-control" [(ngModel)]="newSurvey.period"
+          placeholder="Ingrese período (ej: 1er cuatrimestre 2018)" name="period">
+      </div>
+      <div class="form-group">
+        <label><b>Comentario o propósito de la encuesta</b></label>
+        <textarea [(ngModel)]="newSurvey.comment" class="form-control" rows="3" name="comment"
+          placeholder="Ingrese un comentario para que los alumnos lo lean al completar la encuesta"></textarea>
+      </div>
+      <hr/>
+      <div>
+        <label>
+          <b>Materias</b>
+          <!--TODO agregar un toolip al boton -->
+          <!--TODO poner el boton a la derecha de la columna -->
+          <button type="button float-xs-right" class="btn btn-sm btn-link">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </label>
+
+        <div class="alert alert-danger" role="alert" [hidden]="true">
+          <b class="text-justify">La encuesta no posee ninguna materia.</b>
+        </div>
+
+        <div class="row justify-content-center">
+          <form class="col-9">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" class="form-control" placeholder="Ingrese el nombre de la materia">
+            </div>
+            <div class="form-group">
+              <label>Comisiones</label>
+              <button type="button float-xs-right" class="btn btn-sm btn-link">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <form>
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" class="form-control" placeholder="Ingrese el nombre de la comision">
+              </div>
+
+              <div class="form-group">
+                <div class="form-group">
+                  <label>Profesores</label>
+                  <input type="text" class="form-control" placeholder="Ingrese el nombre de los profesores">
+                </div>
+                <label>Horarios</label>
+                <button type="button float-xs-right" class="btn btn-sm btn-link">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <div>
+                  <select>
+                    <option>Lunes</option>
+                    <option>Martes</option>
+                    <option>Miercoles</option>
+                    <option>Jueves</option>
+                    <option>Viernes</option>
+                    <option>Sabado</option>
+                    <option>Domingo</option>
+                  </select>
+                  <div class="row">
+                    <label class="col">De</label>
+                    <input type="text" class="form-control col">
+                    <label class="col">A</label>
+                    <input type="text" class="form-control col">
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-sm btn-primary" (click)="addCourse()">Guardar comisión</button>
+            </form>
+
+            <button type="submit" class="btn btn-sm btn-primary" (click)="addSubject()">Guardar materia</button>
+          </form>
+        </div>
+
+      </div>
+      <button type="button" class="btn btn-primary" (click)="submitSurvey()">Crear encuesta</button>
+    </form>
+
+  </div>
+
+</div>

@@ -6,17 +6,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyService } from './service/surveys.service';
 import { AppRoutingModule } from './app-routing.module';
+import { NewSurveyComponent } from './new-survey/new-survey.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SurveyComponent
+    SurveyComponent,
+    NewSurveyComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     SurveyService,
