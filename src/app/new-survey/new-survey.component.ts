@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NewSurvey } from './new-survey.model';
+import { NewSurvey, Subject, Class } from './new-survey.model';
 
 @Component({
   selector: 'app-new-survey',
@@ -9,8 +9,15 @@ import { NewSurvey } from './new-survey.model';
 })
 export class NewSurveyComponent implements OnInit {
   newSurvey : NewSurvey;
+  newSubject : Subject;
+  newClass : Class;
+  newSchedule : string;
 
-  constructor() { this.newSurvey = new NewSurvey(); }
+  constructor() {
+    this.newSurvey = new NewSurvey();
+    this.newSubject = new Subject();
+    this.newClass = new Class();
+  }
 
   ngOnInit() {
   }
@@ -19,12 +26,24 @@ export class NewSurveyComponent implements OnInit {
     console.log(this.newSurvey.period + " " + this.newSurvey.comment );
   }
 
-  addCourse(): void{
-
+  addClass(): void{
+    this.newSubject.classes.push(this.newClass);
+    this.newSurvey.showClassForm = false;
+    this.newClass = new Class();
+    console.log(this.newSubject.classes)
   }
 
   addSubject(): void{
-    
+    this.newSurvey.subjects.push(this.newSubject);
+    this.newSubject = new Subject();
+    console.log(this.newSurvey.subjects);
+  }
+
+  addSchedule(): void{
+    this.newClass.schedules.push(this.newSchedule);
+    this.newSchedule = "";
+    this.newClass.showScheduleForm = false;
+    console.log(this.newClass.schedules)
   }
 
 }

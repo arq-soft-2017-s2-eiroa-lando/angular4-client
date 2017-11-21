@@ -2,21 +2,19 @@ export class NewSurvey{
 
   period : string;
   comment: string;
-  subjects : [Subject];
+  subjects : Subject[] = [];
+  showClassForm : boolean
 
 }
 
 export class Subject{
-
   name: string;
-  classes : [Class];
-
+  classes : Class[] = [];
 }
 
 export class Class{
-
   name: string;
   teachers: string;
-  schedule : string;
-  
+  schedules : string[] = [];
+  showScheduleForm : boolean
 }

@@ -18,69 +18,99 @@
           <b>Materias</b>
           <!--TODO agregar un toolip al boton -->
           <!--TODO poner el boton a la derecha de la columna -->
-          <button type="button float-xs-right" class="btn btn-sm btn-link">
+          <button type="button float-xs-right" class="btn btn-sm btn-link"
+                  data-toggle="modal" data-target="#addSubjectModal">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
         </label>
+        <div class="list-group">
+          <a href="#" [hidden]="newSurvey.subjects?.length > 0" class="list-group-item list-group-item-danger">No hay materias listadas para esta encuesta.</a>
+          <div *ngFor="let s of newSurvey.subjects">
+            <a href="#" class="list-group-item list-group-item-action">{{s.name}}</a>
+          </div>
 
-        <div class="alert alert-danger" role="alert" [hidden]="true">
-          <b class="text-justify">La encuesta no posee ninguna materia.</b>
         </div>
-
-        <div class="row justify-content-center">
-          <form class="col-9">
-            <div class="form-group">
-              <label>Nombre</label>
-              <input type="text" class="form-control" placeholder="Ingrese el nombre de la materia">
-            </div>
-            <div class="form-group">
-              <label>Comisiones</label>
-              <button type="button float-xs-right" class="btn btn-sm btn-link">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-            </div>
-
-            <form>
-              <div class="form-group">
-                <label>Nombre</label>
-                <input type="text" class="form-control" placeholder="Ingrese el nombre de la comision">
-              </div>
-
-              <div class="form-group">
-                <div class="form-group">
-                  <label>Profesores</label>
-                  <input type="text" class="form-control" placeholder="Ingrese el nombre de los profesores">
-                </div>
-                <label>Horarios</label>
-                <button type="button float-xs-right" class="btn btn-sm btn-link">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
+        <!-- Modal -->
+        <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva materia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
                 </button>
-                <div>
-                  <select>
-                    <option>Lunes</option>
-                    <option>Martes</option>
-                    <option>Miercoles</option>
-                    <option>Jueves</option>
-                    <option>Viernes</option>
-                    <option>Sabado</option>
-                    <option>Domingo</option>
-                  </select>
-                  <div class="row">
-                    <label class="col">De</label>
-                    <input type="text" class="form-control col">
-                    <label class="col">A</label>
-                    <input type="text" class="form-control col">
-                  </div>
+              </div>
+              <div class="modal-body">
+                <div class="row justify-content-center">
+                  <form class="col-9">
+                    <div class="form-group">
+                      <label>Nombre</label>
+                      <input type="text" name="newSubjectName" class="form-control" [(ngModel)]="newSubject.name" placeholder="Ingrese el nombre de la materia">
+                    </div>
+                    <div class="form-group">
+                      <label>Comisiones</label>
+                      <button (click)="newSurvey.showClassForm = true" type="button float-xs-right" class="btn btn-sm btn-link">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                    <div class="list-group">
+                      <a href="#" [hidden]="newSubject.classes?.length > 0 || newSurvey.showClassForm"
+                         class="list-group-item list-group-item-danger">
+                         No hay comisiones creadas para esta materia.</a>
+                         <div *ngFor="let class of newSubject.classes">
+                           <a href="#" class="list-group-item list-group-item-action">{{class.name}}</a>
+                         </div>
+                    </div>
+
+                    <form [hidden]="!newSurvey.showClassForm">
+                      <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" name="newClassName" class="form-control"
+                          placeholder="Ingrese el nombre de la comision"
+                          [(ngModel)]="newClass.name">
+                      </div>
+
+                      <div class="form-group">
+                        <div class="form-group">
+                          <label>Profesores</label>
+                          <input type="text" class="form-control" placeholder="Ingrese el nombre de los profesores">
+                        </div>
+                        <label>Horarios</label>
+                        <button type="button float-xs-right" class="btn btn-sm btn-link"
+                          (click)="newClass.showScheduleForm = true">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <div class="list-group">
+                          <a href="#" [hidden]="newClass.schedules?.length > 0 || newClass.showScheduleForm"
+                             class="list-group-item list-group-item-danger">
+                             No hay horarios especificados para esta comisión.</a>
+                             <div *ngFor="let schedule of newClass.schedules">
+                               <a href="#" class="list-group-item list-group-item-action">{{schedule}}</a>
+                             </div>
+                        </div>
+                        <form [hidden]="!newClass.showScheduleForm">
+                          <div class="form-group">
+                            <label>Dia y horario</label>
+                            <input type="text" name="schedule" class="form-control"
+                              placeholder="Ej: Martes 20:00 a 22:00" [(ngModel)]="newSchedule">
+                          </div>
+                          <button type="submit" class="btn btn-sm btn-primary" (click)="addSchedule()">Guardar horario</button>
+                        </form>
+                      </div>
+                      <button type="submit" class="btn btn-sm btn-primary" (click)="addClass()">Guardar comisión</button>
+                    </form>
+                  </form>
                 </div>
               </div>
-              <button type="submit" class="btn btn-sm btn-primary" (click)="addCourse()">Guardar comisión</button>
-            </form>
-
-            <button type="submit" class="btn btn-sm btn-primary" (click)="addSubject()">Guardar materia</button>
-          </form>
+              <div class="modal-footer">
+                <button type="button" (click)="addSubject()" class="btn btn-primary" data-dismiss="modal">Guardar materia</button>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
+
+      <hr />
       <button type="button" class="btn btn-primary" (click)="submitSurvey()">Crear encuesta</button>
     </form>
 
