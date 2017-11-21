@@ -3,21 +3,20 @@
 
     <form class="col-6">
       <div class="form-group">
-        <label><b>Período</b></label>
+        <label><b>Período (nombre)</b></label>
         <input required type="text" class="form-control" [(ngModel)]="newSurvey.period"
           placeholder="Ingrese período (ej: 1er cuatrimestre 2018)" name="period">
       </div>
       <div class="form-group">
         <label><b>Comentario o propósito de la encuesta</b></label>
         <textarea [(ngModel)]="newSurvey.comment" class="form-control" rows="3" name="comment"
-          placeholder="Ingrese un comentario para que los alumnos lo lean al completar la encuesta"></textarea>
+          placeholder="Ingrese un comentario para que los alumnos lo lean al completar la encuesta (opcional)">
+        </textarea>
       </div>
       <hr/>
       <div>
         <label>
           <b>Materias</b>
-          <!--TODO agregar un toolip al boton -->
-          <!--TODO poner el boton a la derecha de la columna -->
           <button type="button float-xs-right" class="btn btn-sm btn-link"
                   data-toggle="modal" data-target="#addSubjectModal">
             <i class="fa fa-plus" aria-hidden="true"></i>
@@ -30,7 +29,6 @@
           </div>
 
         </div>
-        <!-- Modal -->
         <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -73,7 +71,9 @@
                       <div class="form-group">
                         <div class="form-group">
                           <label>Profesores</label>
-                          <input type="text" class="form-control" placeholder="Ingrese el nombre de los profesores">
+                          <input type="text" name="newClassTeachers" class="form-control"
+                          placeholder="Ingrese el nombre de los profesores"
+                          [(ngModel)]="newClass.teachers">
                         </div>
                         <label>Horarios</label>
                         <button type="button float-xs-right" class="btn btn-sm btn-link"
@@ -103,7 +103,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" (click)="addSubject()" class="btn btn-primary" data-dismiss="modal">Guardar materia</button>
+                <button type="button" (click)="addSubject()" class="btn btn-primary"
+                  data-dismiss="modal" [hidden]="newSurvey.showClassForm">Guardar materia</button>
               </div>
             </div>
           </div>
@@ -111,7 +112,8 @@
       </div>
 
       <hr />
-      <button type="button" class="btn btn-primary" (click)="submitSurvey()">Crear encuesta</button>
+      <button type="button" class="btn btn-primary" (click)="submitSurvey()"
+        [disabled]="!isValid()">Crear encuesta</button>
     </form>
 
   </div>

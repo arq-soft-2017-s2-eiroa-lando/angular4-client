@@ -12,6 +12,7 @@ export class NewSurveyComponent implements OnInit {
   newSubject : Subject;
   newClass : Class;
   newSchedule : string;
+  canSubmit : boolean;
 
   constructor() {
     this.newSurvey = new NewSurvey();
@@ -22,28 +23,35 @@ export class NewSurveyComponent implements OnInit {
   ngOnInit() {
   }
 
+  isValid() : boolean{
+    return this.newSurvey.isValid()
+  }
+
   submitSurvey(): void {
-    console.log(this.newSurvey.period + " " + this.newSurvey.comment );
+      console.log("Submiting")
   }
 
   addClass(): void{
-    this.newSubject.classes.push(this.newClass);
-    this.newSurvey.showClassForm = false;
-    this.newClass = new Class();
-    console.log(this.newSubject.classes)
+    if(this.newClass.isValid()){
+      this.newSubject.classes.push(this.newClass);
+      this.newSurvey.showClassForm = false;
+      this.newClass = new Class();
+    }
   }
 
   addSubject(): void{
-    this.newSurvey.subjects.push(this.newSubject);
-    this.newSubject = new Subject();
-    console.log(this.newSurvey.subjects);
+    if(this.newSubject.isValid()){
+      this.newSurvey.subjects.push(this.newSubject);
+      this.newSubject = new Subject();
+    }
   }
 
   addSchedule(): void{
-    this.newClass.schedules.push(this.newSchedule);
-    this.newSchedule = "";
-    this.newClass.showScheduleForm = false;
-    console.log(this.newClass.schedules)
+    if(this.newSchedule){
+      this.newClass.schedules.push(this.newSchedule);
+      this.newSchedule = "";
+      this.newClass.showScheduleForm = false;
+    }
   }
 
 }
