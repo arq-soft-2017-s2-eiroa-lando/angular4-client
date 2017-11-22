@@ -15,15 +15,15 @@
       </div>
       <hr/>
       <div>
-        <label>
-          <b>Materias</b>
-          <button type="button float-xs-right" class="btn btn-sm btn-link"
+        <div>
+          <label><b>Materias</b></label>
+          <button type="button" class="btn btn-sm btn-link float-right"
                   data-toggle="modal" data-target="#addSubjectModal">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
-        </label>
+        </div>
         <div class="list-group">
-          <a href="#" [hidden]="newSurvey.subjects?.length > 0" class="list-group-item list-group-item-danger">No hay materias listadas para esta encuesta.</a>
+          <li [hidden]="newSurvey.subjects?.length > 0" class="list-group-item list-group-item-danger"><b>No hay materias listadas para esta encuesta.</b></li>
           <div *ngFor="let s of newSurvey.subjects">
             <a href="#" class="list-group-item list-group-item-action">{{s.name}}</a>
           </div>
@@ -112,8 +112,9 @@
       </div>
 
       <hr />
-      <button type="button" class="btn btn-primary" (click)="submitSurvey()"
-        [disabled]="!isValid()">Crear encuesta</button>
+        <button type="button" class="btn btn-primary offset-md-4" (click)="submitSurvey()"
+          [disabled]="!isValid()">Crear encuesta</button>
+
     </form>
 
   </div>
