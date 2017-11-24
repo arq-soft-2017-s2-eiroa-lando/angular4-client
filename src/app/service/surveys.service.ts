@@ -168,11 +168,46 @@ export class SurveyService{
       }
     ]
   };
+  private surveyStatistics = {
+    title : "1er cuatrimestre 2018",
+    totalSurveys : "500",
+    surveysCompleted : "200",
+    subjects : [
+      {
+        name : "Organizacion de computadoras",
+        classes : [
+          {
+            name: "C1",
+            enrolled : "45"
+          }
+        ]
+      },
+      {
+        name : "Introduccion a la programacion",
+        classes : [
+          {
+            name: "C1",
+            enrolled : "69"
+          },
+          {
+            name: "C2",
+            enrolled : "2"
+          }
+        ]
+      }
+    ]
+
+  }
+
 
   constructor(private http: Http) { }
 
   getSurvey(): any {
     return this.survey;
+  }
+
+  getSurveyStatistics() : any{
+    return this.surveyStatistics;
   }
 
   // getSurvey(): Promise<any>{

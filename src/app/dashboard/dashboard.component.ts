@@ -8,19 +8,31 @@ import { SurveyService } from '../service/surveys.service';
 })
 export class DashboardComponent implements OnInit {
   dashboardData : any;
+  pieChartLabels : string[];
+  pieChartData : number[];
+  pieChartType : string;
 
   constructor(
     private surveyService: SurveyService,
   ){ }
 
   ngOnInit(): void {
-    this.dashboardData = this.getDashboardData();
+    this.dashboardData = this.surveyService.getSurveyStatistics();
+    this.pieChartLabels = ['Total de almunos', 'Encuestas completadas'];
+    this.pieChartData = [this.dashboardData.totalSurveys, this.dashboardData.surveysCompleted];
+    this.pieChartType = "pie";
   }
 
-  private getDashboardData() : any{
-    return {
-      currentSurvey : null
-    };
+
+
+  // events
+  public chartClicked(e:any):void {
+    console.log(e);
   }
+
+  public chartHovered(e:any):void {
+    console.log(e);
+  }
+
 
 }

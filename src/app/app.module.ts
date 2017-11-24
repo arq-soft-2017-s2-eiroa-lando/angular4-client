@@ -8,6 +8,7 @@ import { SurveyService } from './service/surveys.service';
 import { AppRoutingModule } from './app-routing.module';
 import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { FormsModule }   from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule }   from '@angular/forms';
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     SurveyService,

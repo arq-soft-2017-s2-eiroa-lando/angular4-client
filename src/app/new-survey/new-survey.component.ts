@@ -44,6 +44,7 @@ export class NewSurveyComponent implements OnInit {
 
   submitSurvey(): void {
       console.log("Submiting")
+      console.log(this.newSurvey)
   }
 
   addClass(): void{
