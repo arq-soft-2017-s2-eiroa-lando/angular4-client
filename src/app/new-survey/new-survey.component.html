@@ -17,7 +17,7 @@
       <div>
         <div>
           <label><b>Materias</b></label>
-          <button type="button" class="btn btn-sm btn-link float-right"
+          <button #editSubjectBtn type="button" class="btn btn-sm btn-link float-right"
                   data-toggle="modal" data-target="#addSubjectModal">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </button>
@@ -25,11 +25,21 @@
         <div class="list-group">
           <li [hidden]="newSurvey.subjects?.length > 0" class="list-group-item list-group-item-danger"><b>No hay materias listadas para esta encuesta.</b></li>
           <div *ngFor="let s of newSurvey.subjects">
-            <a href="#" class="list-group-item list-group-item-action">{{s.name}}</a>
+            <!-- <a href="#" class="list-group-item list-group-item-action">{{s.name}}</a> -->
+            <li class="list-group-item justify-content-between">
+              {{s.name}}
+              <span>
+                <i (click)="editSubject(s)"
+                  class="btn btn-sm btn-link fa fa-pencil">
+                  </i>
+                <i (click)="removeSubject(s)"
+                  class="btn btn-sm btn-link fa fa-trash-o">
+                </i>
+              </span>
+            </li>
           </div>
-
         </div>
-        <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -45,19 +55,32 @@
                       <label>Nombre</label>
                       <input type="text" name="newSubjectName" class="form-control" [(ngModel)]="newSubject.name" placeholder="Ingrese el nombre de la materia">
                     </div>
-                    <div class="form-group">
-                      <label>Comisiones</label>
-                      <button (click)="newSurvey.showClassForm = true" type="button float-xs-right" class="btn btn-sm btn-link">
+
+                    <div>
+                      <label><b>Comisiones</b></label>
+                      <button (click)="newSurvey.showClassForm = true" type="button"
+                              class="btn btn-sm btn-link float-right">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                       </button>
                     </div>
                     <div class="list-group">
-                      <a href="#" [hidden]="newSubject.classes?.length > 0 || newSurvey.showClassForm"
+                      <li [hidden]="newSubject.classes?.length > 0 || newSurvey.showClassForm"
                          class="list-group-item list-group-item-danger">
-                         No hay comisiones creadas para esta materia.</a>
-                         <div *ngFor="let class of newSubject.classes">
-                           <a href="#" class="list-group-item list-group-item-action">{{class.name}}</a>
-                         </div>
+                         <b>No hay comisiones creadas para esta materia.</b>
+                      </li>
+                      <div *ngFor="let class of newSubject.classes">
+                        <li class="list-group-item justify-content-between">
+                          {{class.name}}
+                          <span>
+                            <i (click)="editClass(class)"
+                              class="btn btn-sm btn-link fa fa-pencil">
+                              </i>
+                            <i (click)="removeClass(class)"
+                              class="btn btn-sm btn-link fa fa-trash-o">
+                            </i>
+                          </span>
+                        </li>
+                      </div>
                     </div>
 
                     <form [hidden]="!newSurvey.showClassForm">
@@ -76,35 +99,57 @@
                           [(ngModel)]="newClass.teachers">
                         </div>
                         <label>Horarios</label>
-                        <button type="button float-xs-right" class="btn btn-sm btn-link"
+                        <button type="button" class="btn btn-sm btn-link float-right"
                           (click)="newClass.showScheduleForm = true">
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
                         <div class="list-group">
-                          <a href="#" [hidden]="newClass.schedules?.length > 0 || newClass.showScheduleForm"
+                          <li [hidden]="newClass.schedules?.length > 0 || newClass.showScheduleForm"
                              class="list-group-item list-group-item-danger">
-                             No hay horarios especificados para esta comisión.</a>
-                             <div *ngFor="let schedule of newClass.schedules">
-                               <a href="#" class="list-group-item list-group-item-action">{{schedule}}</a>
-                             </div>
+                             <b>No hay horarios especificados para esta comisión.</b>
+                          </li>
+                          <div *ngFor="let schedule of newClass.schedules">
+                            <li class="list-group-item justify-content-between">
+                              {{schedule}}
+                              <span>
+                                <i (click)="editSchedule(schedule)"
+                                  class="btn btn-sm btn-link fa fa-pencil">
+                                  </i>
+                                <i (click)="removeSchedule(schedule)"
+                                  class="btn btn-sm btn-link fa fa-trash-o">
+                                </i>
+                              </span>
+                            </li>
+                          </div>
                         </div>
+
                         <form [hidden]="!newClass.showScheduleForm">
                           <div class="form-group">
                             <label>Dia y horario</label>
                             <input type="text" name="schedule" class="form-control"
                               placeholder="Ej: Martes 20:00 a 22:00" [(ngModel)]="newSchedule">
                           </div>
-                          <button type="submit" class="btn btn-sm btn-primary" (click)="addSchedule()">Guardar horario</button>
+                          <button type="submit" class="btn btn-sm btn-primary offset-md-4"
+                            (click)="addSchedule()" [disabled]="!isNewScheduleValid()">
+                            Guardar horario</button>
                         </form>
                       </div>
-                      <button type="submit" class="btn btn-sm btn-primary" (click)="addClass()">Guardar comisión</button>
+                      <button type="submit" class="btn btn-sm btn-primary offset-md-4"
+                        [hidden]="newClass.showScheduleForm" (click)="addClass()" [disabled]="!isNewClassValid()">
+                        Guardar comisión</button>
                     </form>
                   </form>
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" (click)="addSubject()" class="btn btn-primary"
-                  data-dismiss="modal" [hidden]="newSurvey.showClassForm">Guardar materia</button>
+                <button type="button" class="btn btn-primary" (click)='addSubject()'
+                   [hidden]="newSurvey.showClassForm" [disabled]="!isNewSubjectValid()"  >
+                  Guardar materia
+                </button>
+
+                <!-- Hack para cerrar el modal. A pesar de tener un data-dismiss el boton de guardar materia no cierra el modal.
+                     Este boton esta oculto y se aprieta programaticamente en el metodo addSubject()-->
+                <button class="btn btn-primary" [hidden]="true" #closeModalBtn name="button" data-dismiss="modal" type="submit"></button>
               </div>
             </div>
           </div>
