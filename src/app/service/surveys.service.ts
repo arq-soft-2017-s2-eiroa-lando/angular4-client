@@ -1,4 +1,4 @@
-import { Injectable }    from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
@@ -117,7 +117,55 @@ export class SurveyService{
             }
           ],
           options : [ "Ya cursé", "Cursaria en C1", "Cursaria en C2", "Cursaria en C3", "No voy a cursar"]
-        }
+        },
+      {
+        name: "Programación con Objetos 1",
+        classes : [
+          {
+            name : "Comision 1",
+            schedule : [
+              {
+                day: "Lunes",
+                time: "18:00 - 22:00"
+              },
+              {
+                day: "Miercoles",
+                time: "18:00 - 22:00"
+              }
+            ],
+            teachers: "Juan Perez"
+          },
+          {
+            name : "Comision 2",
+            schedule : [
+              {
+                day: "Lunes",
+                time: "9:00 - 13:00"
+              },
+              {
+                day: "Miercoles",
+                time: "09:00 - 13:00"
+              }
+            ],
+            teachers: "Pablo Sanchez"
+          },
+          {
+            name : "Comision 3",
+            schedule : [
+              {
+                day: "Martes",
+                time: "10:00 - 14:00"
+              },
+              {
+                day: "Sabado",
+                time: "10:00 - 14:00"
+              }
+            ],
+            teachers: "Jose Alvarez"
+          }
+        ],
+        options : [ "Ya cursé", "Cursaria en C1", "Cursaria en C2", "Cursaria en C3", "No voy a cursar"]
+      }
     ]
   };
 
