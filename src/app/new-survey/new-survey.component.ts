@@ -13,6 +13,7 @@ export class NewSurveyComponent implements OnInit {
   newClass : Class;
   newSchedule : string;
   canSubmit : boolean;
+  newQuestion : string;
   @ViewChild('closeModalBtn') closeModalBtn:ElementRef;
   @ViewChild('editSubjectBtn') editSubjectBtn:ElementRef;
 
@@ -100,5 +101,22 @@ export class NewSurveyComponent implements OnInit {
     this.editSubjectBtn.nativeElement.click(); //Abre el modal
   }
 
+  isEmptyQuestion() : boolean{
+    return this.newQuestion == null || this.newQuestion == ""
+  }
+
+  saveQuestion() : void{
+    this.newSubject.questions.push(this.newQuestion)
+    this.newQuestion = "";
+  }
+
+  removeQuestion(aQuestion) : void{
+    this.newSubject.questions = this.newSubject.questions.filter(q => q != aQuestion)
+  }
+
+  editQuestion(aQuestion) : void{
+    this.newQuestion = aQuestion
+    this.removeQuestion(aQuestion)
+  }
 
 }

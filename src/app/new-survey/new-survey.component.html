@@ -52,10 +52,10 @@
                 <div class="row justify-content-center">
                   <form class="col-9">
                     <div class="form-group">
-                      <label>Nombre</label>
+                      <label><b>Nombre</b></label>
                       <input type="text" name="newSubjectName" class="form-control" [(ngModel)]="newSubject.name" placeholder="Ingrese el nombre de la materia">
                     </div>
-
+                    <hr />
                     <div>
                       <label><b>Comisiones</b></label>
                       <button (click)="newSurvey.showClassForm = true" type="button"
@@ -82,7 +82,6 @@
                         </li>
                       </div>
                     </div>
-
                     <form [hidden]="!newSurvey.showClassForm">
                       <div class="form-group">
                         <label>Nombre</label>
@@ -138,6 +137,41 @@
                         [hidden]="newClass.showScheduleForm" (click)="addClass()" [disabled]="!isNewClassValid()">
                         Guardar comisión</button>
                     </form>
+                    <hr />
+                    <div [hidden]="newSurvey.showClassForm">
+                      <div>
+                        <label><b>Preguntas</b></label>
+                        <div class="list-group">
+                          <li [hidden]="newSubject.questions?.length > 0 || newSurvey.showClassForm"
+                             class="list-group-item list-group-item-danger">
+                             <b>No hay preguntas configuradas para esta materia.</b>
+                          </li>
+                          <div *ngFor="let question of newSubject.questions">
+                            <li class="list-group-item justify-content-between">
+                              {{question}}
+                              <span>
+                                <i (click)="editQuestion(question)"
+                                  class="btn btn-sm btn-link fa fa-pencil">
+                                  </i>
+                                <i (click)="removeQuestion(question)"
+                                  class="btn btn-sm btn-link fa fa-trash-o">
+                                </i>
+                              </span>
+                            </li>
+                          </div>
+                          <br />
+                             <div class="input-group">
+                               <input type="text" class="form-control" placeholder="Ingrese nueva pregunta..."
+                                [(ngModel)]="newQuestion" name="newQuestion">
+                               <span class="input-group-btn" (click)="saveQuestion()">
+                                 <button class="btn btn-info" type="submit" [hidden]="isEmptyQuestion()">
+                                     <i class="fa fa-plus-circle" ></i>
+                                 </button>
+                               </span>
+                             </div>
+                        </div>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>

@@ -13,9 +13,10 @@ export class NewSurvey{
 export class Subject{
   name: string = "";
   classes : Class[] = [];
+  questions : string[] = [];
 
   isValid() : boolean{
-    return (this.name != null && this.name && this.classes.length > 0);
+    return (this.name != null && this.name && this.classes.length > 0 && this.questions.length > 0);
   }
 }
 
