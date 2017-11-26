@@ -1,15 +1,89 @@
-<div class="alert alert-danger" role="alert" [hidden]="dashboardData">
+<div class="alert alert-danger" role="alert" > <!--[hidden]="dashboardData"-->
   <b class="text-justify">No hay ninguna encuesta activa. <a routerLink="/new-survey" routerLinkActive="active">Crear una encuesta</a> </b>
 </div>
 <div>
   <h1>{{dashboardData.title}}</h1>
 
-  <div style="display: block">
-  <canvas baseChart
-          [data]="pieChartData"
-          [labels]="pieChartLabels"
-          [chartType]="pieChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)"></canvas>
-        </div>
+  <small>Click header to enable sorting</small><br>
+  <ngx-table
+    [configuration]="configuration"
+    [data]="data"
+    [columns]="columns"
+    [pagination]="pagination">
+  </ngx-table>
+
+  <div class="card">
+    <div class="card-header">
+      Encuestas completadas
+    </div>
+    <div class="card-block">
+      <!-- <h4 class="card-title">Special title treatment</h4> -->
+      <div style="display: block">
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [chartType]="pieChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+            </div>
+    </div>
+  </div>
+
+  <!-- <table class="table table-sm table-responsive table-hover">
+    <thead>
+      <tr>
+        <th>Materia</th>
+        <th>Comision</th>
+        <th>Horarios</th>
+        <th>Inscriptos</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let s of mostEnrolledClasses">
+      <tr class="bg-danger">
+        <th scope="row">{{s.subject}}</th>
+        <td>{{s.name}}</td>
+        <td>{{s.schedule}}</td>
+        <td>{{s.enrolled}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-sm table-responsive table-hover">
+    <thead>
+      <tr>
+        <th>Materia</th>
+        <th>Comision</th>
+        <th>Horarios</th>
+        <th>Inscriptos</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let s of leastEnrolledClasses">
+      <tr class="bg-info">
+        <th scope="row">{{s.subject}}</th>
+        <td>{{s.name}}</td>
+        <td>{{s.schedule}}</td>
+        <td>{{s.enrolled}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-sm table-responsive table-hover">
+    <thead>
+      <tr>
+        <th>Materia</th>
+        <th>Comision</th>
+        <th>Horarios</th>
+        <th>Inscriptos</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let s of dashboardData.classes">
+      <tr>
+        <th scope="row">{{s.subject}}</th>
+        <td>{{s.name}}</td>
+        <td>{{s.schedule}}</td>
+        <td>{{s.enrolled}}</td>
+      </tr>
+    </tbody>
+  </table> -->
+
 </div>

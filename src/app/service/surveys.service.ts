@@ -172,29 +172,80 @@ export class SurveyService{
     title : "1er cuatrimestre 2018",
     totalSurveys : "500",
     surveysCompleted : "200",
-    subjects : [
+    classes : [
       {
-        name : "Organizacion de computadoras",
-        classes : [
-          {
-            name: "C1",
-            enrolled : "45"
-          }
+        subject : "Organizacion de computadoras",
+        name: "C1",
+        enrolled : "45",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
         ]
       },
       {
-        name : "Introduccion a la programacion",
-        classes : [
-          {
-            name: "C1",
-            enrolled : "69"
-          },
-          {
-            name: "C2",
-            enrolled : "2"
-          }
+        subject : "Organizacion de computadoras",
+        name: "C2",
+        enrolled : "4",
+        schedule: [
+            "Martes 08:00 a 10:00 hs",
+            "Jueves 08:00 a 10:00 hs"
+        ]
+      },
+      {
+        subject : "Introduccion a la programacion",
+        name: "C1",
+        enrolled : "1",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
+        ]
+      },
+      {
+        subject : "Introduccion a la programacion",
+        name: "C2",
+        enrolled : "90",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
+        ]
+      },
+      {
+        subject : "Introduccion a la programacion",
+        name: "C3",
+        enrolled : "55",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
+        ]
+      },
+      {
+        subject : "Objetos 1",
+        name: "C1",
+        enrolled : "10",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
+        ]
+      },
+      {
+        subject : "Objetos 1",
+        name: "C2",
+        enrolled : "100",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
+        ]
+      },
+      {
+        subject : "Objetos 1",
+        name: "C3",
+        enrolled : "0",
+        schedule: [
+            "Martes 20:00 a 22:00 hs",
+            "Jueves 20:00 a 22:00 hs"
         ]
       }
+
     ]
 
   }

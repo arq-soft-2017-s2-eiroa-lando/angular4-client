@@ -21,11 +21,14 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular-4-data-table": "^0.2.4",
     "angular-in-memory-web-api": "^0.5.1",
     "chart.js": "^2.7.1",
     "core-js": "^2.4.1",
     "ng2-charts": "^1.6.0",
+    "ngx-easy-table": "^2.0.0",
     "rxjs": "^5.4.2",
+    "typescript": "^2.7.0-dev.20171126",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
