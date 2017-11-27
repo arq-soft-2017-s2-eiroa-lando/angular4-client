@@ -16,7 +16,8 @@ export class Subject{
   questions : string[] = [];
 
   isValid() : boolean{
-    return (this.name != null && this.name && this.classes.length > 0 && this.questions.length > 0);
+    return (this.name != null && this.name && this.classes.length > 0
+      && this.questions.length > 0);
   }
 }
 
@@ -24,10 +25,11 @@ export class Class{
   name: string;
   teachers: string;
   schedules : string[] = [];
-  showScheduleForm : boolean
+  showScheduleForm : boolean;
+  size: number;
 
   isValid() : boolean {
     return (this.name != null && this.name && this.teachers != null
-      && this.teachers && this.schedules.length > 0);
+      && this.teachers && this.schedules.length > 0 && this.size && this.size > 0);
   }
 }

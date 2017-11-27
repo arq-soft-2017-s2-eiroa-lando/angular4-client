@@ -97,6 +97,11 @@
                           placeholder="Ingrese el nombre de los profesores"
                           [(ngModel)]="newClass.teachers">
                         </div>
+                        <div class="form-group">
+                          <label>Cupo</label>
+                          <input type="number" name="newClassSize" class="form-control"
+                          [(ngModel)]="newClass.size">
+                        </div>
                         <label>Horarios</label>
                         <button type="button" class="btn btn-sm btn-link float-right"
                           (click)="newClass.showScheduleForm = true">

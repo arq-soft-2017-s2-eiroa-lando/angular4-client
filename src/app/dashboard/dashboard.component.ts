@@ -19,7 +19,8 @@ export class DashboardComponent implements OnInit {
     { key: 'subject', title: 'Materia' },
     { key: 'name', title: 'Comision' },
     { key: 'schedule', title: 'Horarios' },
-    { key: 'enrolled', title: 'Inscriptos' }
+    { key: 'enrolled', title: 'Inscriptos' },
+    { key: 'size', title: 'Cupo'}
   ];
   data = [];
   configuration;
@@ -37,6 +38,11 @@ export class DashboardComponent implements OnInit {
     this.configuration = ConfigService.config;
     this.data = this.dashboardData.classes;
     this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
+  }
+
+  getCellColor(enrolled, size): string{
+    if( enrolled > size) return "crimson"
+    if( enrolled / size > 0.8  ) return "darkorange"
   }
 
 

@@ -181,7 +181,8 @@ export class SurveyService{
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs",
             "Viernes 09:00 a 12:00 hs"
-        ]
+        ],
+        size: 60
       },
       {
         subject : "Organizacion de computadoras",
@@ -190,7 +191,8 @@ export class SurveyService{
         schedule: [
             "Martes 08:00 a 10:00 hs",
             "Jueves 08:00 a 10:00 hs"
-        ]
+        ],
+        size: 30
       },
       {
         subject : "Introduccion a la programacion",
@@ -199,7 +201,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 15
       },
       {
         subject : "Introduccion a la programacion",
@@ -208,7 +211,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 100
       },
       {
         subject : "Introduccion a la programacion",
@@ -217,7 +221,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 50
       },
       {
         subject : "Objetos 1",
@@ -226,7 +231,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 40
       },
       {
         subject : "Objetos 1",
@@ -235,7 +241,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 60
       },
       {
         subject : "Objetos 1",
@@ -244,7 +251,8 @@ export class SurveyService{
         schedule: [
             "Martes 20:00 a 22:00 hs",
             "Jueves 20:00 a 22:00 hs"
-        ]
+        ],
+        size: 60
       }
 
     ]

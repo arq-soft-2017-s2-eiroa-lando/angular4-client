@@ -25,6 +25,14 @@
         [configuration]="configuration"
         [data]="data"
         [columns]="columns">
+        <ng-template let-row >
+          <td>{{row.subject}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.schedule}}</td>
+          <td [style.backgroundColor]="getCellColor(row.enrolled, row.size)">{{row.enrolled}}</td>
+          <td>{{row.size}}</td>
+        </ng-template>
+
       </ngx-table>
     </div>
 
