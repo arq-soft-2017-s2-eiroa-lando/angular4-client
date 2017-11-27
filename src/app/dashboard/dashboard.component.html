@@ -5,12 +5,15 @@
   <h1>{{dashboardData.title}}</h1>
 
   <small>Click header to enable sorting</small><br>
+  <div class="columns">
+  <div class="column col-12">
   <ngx-table
     [configuration]="configuration"
     [data]="data"
     [columns]="columns"
     [pagination]="pagination">
   </ngx-table>
+</div></div>
 
   <div class="card">
     <div class="card-header">
