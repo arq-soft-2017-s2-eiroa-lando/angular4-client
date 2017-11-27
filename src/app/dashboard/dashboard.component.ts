@@ -13,8 +13,7 @@ export class DashboardComponent implements OnInit {
   pieChartLabels : string[];
   pieChartData : number[];
   pieChartType : string;
-  // mostEnrolledClasses : any[] = [];
-  // leastEnrolledClasses : any[] = [];
+  completionPercentage : number;
 
   columns = [
     { key: 'subject', title: 'Materia' },
@@ -31,24 +30,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardData = this.surveyService.getSurveyStatistics();
-    this.pieChartLabels = ['Total de almunos', 'Encuestas completadas'];
-    this.pieChartData = [this.dashboardData.totalSurveys, this.dashboardData.surveysCompleted];
+    this.pieChartLabels = ['No completadas', 'Completadas'];
+    this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
     this.pieChartType = "pie";
     this.dashboardData.classes.sort( (s1,s2) => s1.enrolled - s2.enrolled );
-
-    // var classesLength = this.dashboardData.classes.length
-    //
-    // //Extraer las 5 comisiones con mas cantidad de inscriptos
-    // var sliceMax = classes >= 5 ? 5 : classes
-    // this.leastEnrolledClasses = this.dashboardData.classes.slice(0,sliceMax);
-    //
-    // //Extraer las 5 comisiones con menos cantidad de inscriptos
-    // var sliceMin = classes >= 5 ? classes - 5 : 0
-    // this.mostEnrolledClasses = this.dashboardData.classes.slice(sliceMin, classes);
-
     this.configuration = ConfigService.config;
-
     this.data = this.dashboardData.classes;
+    this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
   }
 
 

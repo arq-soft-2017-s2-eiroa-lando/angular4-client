@@ -11,14 +11,14 @@ export class ConfigService {
     paginationEnabled: false,
     exportEnabled: false,
     clickEvent: false,
-    selectRow: true,
+    selectRow: false,
     selectCol: false,
     selectCell: false,
     rows: 5,
     additionalActions: false,
     serverPagination: false,
     isLoading: false,
-    detailsTemplate: true,
+    detailsTemplate: false,
     groupRows: false
   };
 }

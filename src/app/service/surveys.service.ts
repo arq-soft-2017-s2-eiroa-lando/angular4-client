@@ -170,8 +170,8 @@ export class SurveyService{
   };
   private surveyStatistics = {
     title : "1er cuatrimestre 2018",
-    totalSurveys : "500",
-    surveysCompleted : "200",
+    totalSurveys : "734",
+    surveysCompleted : "482",
     classes : [
       {
         subject : "Organizacion de computadoras",
@@ -179,7 +179,8 @@ export class SurveyService{
         enrolled : "45",
         schedule: [
             "Martes 20:00 a 22:00 hs",
-            "Jueves 20:00 a 22:00 hs"
+            "Jueves 20:00 a 22:00 hs",
+            "Viernes 09:00 a 12:00 hs"
         ]
       },
       {
