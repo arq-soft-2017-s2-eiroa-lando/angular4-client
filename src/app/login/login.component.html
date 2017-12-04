@@ -1,0 +1,12 @@
+<div class="loginmodal-container">
+	<h1>Login</h1><br>
+  <form>
+  	<input type="text" name="user" placeholder="Usuario" [(ngModel)]="user">
+  	<input type="password" name="pass" placeholder="Contraseña" [(ngModel)]="pass">
+  	<input type="submit" name="login" class="login loginmodal-submit"
+      (click)="login()" value="Login">
+  </form>
+  <!-- <div class="login-help">
+	   <a href="#">Register</a> - <a href="#">Forgot Password</a>
+  </div> -->
+</div>

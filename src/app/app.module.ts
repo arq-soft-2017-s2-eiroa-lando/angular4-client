@@ -10,13 +10,17 @@ import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { FormsModule }   from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { TableModule } from 'ngx-easy-table';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './service/login.service';
+import { LoginGuard } from './guard/login.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SurveyComponent,
-    NewSurveyComponent
+    NewSurveyComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,8 @@ import { TableModule } from 'ngx-easy-table';
   ],
   providers: [
     SurveyService,
+    LoginService,
+    LoginGuard,
     AppComponent
   ],
   bootstrap: [AppComponent]
