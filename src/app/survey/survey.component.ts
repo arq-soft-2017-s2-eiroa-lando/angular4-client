@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../service/surveys.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'survey',
@@ -8,41 +9,52 @@ import { SurveyService } from '../service/surveys.service';
 })
 export class SurveyComponent implements OnInit {
   survey: any;
-  answers: Map<string,string> = new Map<string, string>(); //Mantiene las respuestas para cada materia
+  answers: Answer[] = []; //Mantiene las respuestas para cada materia
   canSubmit : boolean;
+  surveyHash : string;
 
   constructor(
     private surveyService: SurveyService,
+    private route: ActivatedRoute
   ){ }
 
   ngOnInit(): void {
-    // this.surveyService.getSurvey().then(s=> this.survey = s);
-    this.survey = this.surveyService.getSurvey();
+    this.surveyHash = this.route.snapshot.paramMap.get('id');
+    this.survey = this.surveyService.getSurvey(this.surveyHash)
+      .then(s => this.initialize(s) );
+  }
 
+  initialize(survey) : void{
+    this.survey = survey;
     //Se inicializan las respuestas para cada materia, que de momento son vacias.
-    this.survey.subjects.map(s => this.answers.set(s.name , "" ));
+    this.survey.subjects.map(s => this.answers.push(new Answer(s.id, null)));
+    this.canSubmit = this.isFormValid();
   }
 
   onChange(answer, subject) : void {
-    this.answers.set(subject.name, answer);
+    this.answers.filter(a => a.id == subject.id )[0].option = answer;
     this.canSubmit = this.isFormValid();
   }
 
   submitSurvey(): void {
+    console.log(this.answers)
     if(this.isFormValid()){
-      console.log("submiting");
+      this.surveyService.saveAnswer(this.surveyHash, this.answers).then(
+        () => console.log("Answer submitted")
+      )
     }
   }
 
-  //Devuelve true si todas las materias del formulario fueron respondidas.
   private isFormValid(): boolean {
-    for(let subject of Array.from( this.answers.keys()) ) {
-      var answer = this.answers.get(subject);
-      if(answer === "" || answer === "Seleccionar opción"){
+    for(let answer of this.answers ) {
+      if(answer.option === "" || answer.option === "Seleccionar opción"){
         return false;
       }
     }
     return true;
   }
+}
 
+class Answer{
+    constructor(public id, public option){  }
 }

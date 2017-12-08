@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h1>{{survey.title}}</h1>
+  <h1>Encuesta de intencion de inscripcion</h1>
   <h2 class="text-muted">{{survey.period}}</h2>
   <p>{{survey.comment}}</p>
   <br />
@@ -16,7 +16,7 @@
               <div class="alert alert-info col" *ngFor="let class of subject.classes">
                   <p class="font-weight-bold text-center">{{class.name}}</p>
                   <div *ngFor="let s of class.schedule">
-                    <p>{{s.day}} {{s.time}}</p>
+                    <p>{{s}}</p>
                   </div>
                     Profesores: {{class.teachers}}
               </div>
@@ -26,7 +26,7 @@
                 <div class="selectWrapper">
                   <select (change)="onChange($event.target.value, subject)" >
                     <option>Seleccionar opción</option>
-                    <option *ngFor="let option of subject.options" >{{option}}</option>
+                    <option *ngFor="let option of subject.options" [selected]="option == subject.optionChosen">{{option}}</option>
                   </select>
                 </div>
               </div>
@@ -36,7 +36,7 @@
       </div>
       <br />
       <div class="row justify-content-center">
-        <button type="button" class="btn-primary btn-lg" (ngSubmit)="submitSurvey()" [hidden]="!canSubmit">Submit</button>
+        <button type="button" class="btn-primary btn-lg" (click)="submitSurvey()" [hidden]="!canSubmit">Submit</button>
         <div class="alert alert-danger" role="alert" [hidden]="canSubmit">
           <b class="text-justify">Aun quedan respuestas por completar.</b>
         </div>

@@ -3,21 +3,23 @@ export class NewSurvey{
   period : string;
   comment: string;
   subjects : Subject[] = [];
-  showClassForm : boolean
+  showClassForm : boolean;
+  emails : string;
 
   isValid() : boolean{
-    return (this.period != null && this.period && this.subjects.length > 0);
+    return (this.period != null && this.period && this.subjects.length > 0
+      && this.emails && this.emails.length > 0);
   }
 }
 
 export class Subject{
   name: string = "";
   classes : Class[] = [];
-  questions : string[] = [];
+  options : string[] = [];
 
   isValid() : boolean{
     return (this.name != null && this.name && this.classes.length > 0
-      && this.questions.length > 0);
+      && this.options.length > 0);
   }
 }
 

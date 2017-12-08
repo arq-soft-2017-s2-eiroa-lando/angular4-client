@@ -147,20 +147,20 @@
                     <hr />
                     <div [hidden]="newSurvey.showClassForm">
                       <div>
-                        <label><b>Preguntas</b></label>
+                        <label><b>Opciones</b></label>
                         <div class="list-group">
-                          <li [hidden]="newSubject.questions?.length > 0 || newSurvey.showClassForm"
+                          <li [hidden]="newSubject.options?.length > 0 || newSurvey.showClassForm"
                              class="list-group-item list-group-item-danger">
-                             <b>No hay preguntas configuradas para esta materia.</b>
+                             <b>No hay opciones configuradas para esta materia.</b>
                           </li>
-                          <div *ngFor="let question of newSubject.questions">
+                          <div *ngFor="let option of newSubject.options">
                             <li class="list-group-item justify-content-between">
-                              {{question}}
+                              {{option}}
                               <span>
-                                <i (click)="editQuestion(question)"
+                                <i (click)="editoption(option)"
                                   class="btn btn-sm btn-link fa fa-pencil">
                                   </i>
-                                <i (click)="removeQuestion(question)"
+                                <i (click)="removeOption(option)"
                                   class="btn btn-sm btn-link fa fa-trash-o">
                                 </i>
                               </span>
@@ -169,9 +169,9 @@
                           <br />
                              <div class="input-group">
                                <input type="text" class="form-control" placeholder="Ingrese nueva pregunta..."
-                                [(ngModel)]="newQuestion" name="newQuestion">
-                               <span class="input-group-btn" (click)="saveQuestion()">
-                                 <button class="btn btn-info" type="submit" [hidden]="isEmptyQuestion()">
+                                [(ngModel)]="newOption" name="newOption">
+                               <span class="input-group-btn" (click)="saveOption()">
+                                 <button class="btn btn-info" type="submit" [hidden]="isEmptyOption()">
                                      <i class="fa fa-plus-circle" ></i>
                                  </button>
                                </span>
@@ -198,8 +198,14 @@
       </div>
 
       <hr />
+
+      <textarea [(ngModel)]="newSurvey.emails" class="form-control" rows="3" name="emails"
+        placeholder="Ingrese una lista de mails separados por coma para enviar las encuestas">
+      </textarea>
+
+      <hr />
         <button type="button" class="btn btn-primary offset-md-4" (click)="submitSurvey()"
-          >Crear encuesta</button> <!--[disabled]="!isValid()"-->
+          [disabled]="!isValid()">Crear encuesta</button>
 
     </form>
 
