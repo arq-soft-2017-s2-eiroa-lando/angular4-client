@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class SurveyService{
 
   private headers = new Headers({'Content-Type': 'application/json'});
+  private baseUrl = "http://localhost:8080/";
   private survey = {
     title: "Encuesta de intencion de inscripcion",
     period: "1er cuatrimestre 2018",
@@ -268,6 +269,12 @@ export class SurveyService{
 
   getSurveyStatistics() : any{
     return this.surveyStatistics;
+  }
+
+  saveSurvey(survey): Promise<void>{
+    return this.http.post(this.baseUrl + "api/survey/new-survey", JSON.stringify(survey), {headers: this.headers})
+      .toPromise().then(() => null )
+      .catch(this.handleError);
   }
 
   // getSurvey(): Promise<any>{

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NewSurvey, Subject, Class } from './new-survey.model';
+import { SurveyService } from '../service/surveys.service';
 
 @Component({
   selector: 'app-new-survey',
@@ -17,7 +18,7 @@ export class NewSurveyComponent implements OnInit {
   @ViewChild('closeModalBtn') closeModalBtn:ElementRef;
   @ViewChild('editSubjectBtn') editSubjectBtn:ElementRef;
 
-  constructor() {
+  constructor(private surveyService :SurveyService) {
     this.newSurvey = new NewSurvey();
     this.newSubject = new Subject();
     this.newClass = new Class();
@@ -43,8 +44,9 @@ export class NewSurveyComponent implements OnInit {
   }
 
   submitSurvey(): void {
-      console.log("Submiting")
-      console.log(this.newSurvey)
+      this.surveyService.saveSurvey(this.newSurvey).then(
+        () => console.log("Survey submitted") //Redireccionar al dashboard
+      );
   }
 
   addClass(): void{
