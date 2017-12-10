@@ -17,13 +17,15 @@ export class SurveyService{
   }
 
   baseUrl(): string {
+    console.log(document.location.href.indexOf("localhost"))
     if( document.location.href.indexOf("localhost") == -1 ){
-      return "http://52.11.222.208:8090";
+      return "http://52.11.222.208:8090/";
     }
     return "http://localhost:8080/";
   }
 
   saveSurvey(survey): Promise<void>{
+    console.log(this.baseUrl())
     return this.http.post(this.baseUrl() + "api/survey/new-survey", JSON.stringify(survey), {headers: this.headers})
       .toPromise().then(() => null )
       .catch(this.handleError);
