@@ -53,6 +53,7 @@ export class NewSurveyComponent implements OnInit {
     if(this.newClass.isValid()){
       this.newSubject.classes.push(this.newClass);
       this.newSurvey.showClassForm = false;
+      this.newSubject.options.push("Cursaría en " + this.newClass.name);
       this.newClass = new Class();
     }
   }
@@ -64,6 +65,7 @@ export class NewSurveyComponent implements OnInit {
   editClass(aClass) : void{
     this.newSurvey.showClassForm = true
     this.newClass = aClass
+    this.newSubject.options = this.newSubject.options.filter(o => o !== "Cursaría en " + aClass.name);
     this.removeClass(aClass)
   }
 
@@ -108,18 +110,18 @@ export class NewSurveyComponent implements OnInit {
     return this.newOption == null || this.newOption == ""
   }
 
-  saveOption() : void{
-    this.newSubject.options.push(this.newOption)
-    this.newOption = "";
-  }
+  // saveOption() : void{
+  //   this.newSubject.options.push(this.newOption)
+  //   this.newOption = "";
+  // }
 
-  removeOption(anOption) : void{
-    this.newSubject.options = this.newSubject.options.filter(q => q != anOption)
-  }
+  // removeOption(anOption) : void{
+  //   this.newSubject.options = this.newSubject.options.filter(q => q != anOption)
+  // }
 
-  editQuestion(anOption) : void{
-    this.newOption = anOption
-    this.removeOption(anOption)
-  }
+  // editQuestion(anOption) : void{
+  //   this.newOption = anOption
+  //   this.removeOption(anOption)
+  // }
 
 }

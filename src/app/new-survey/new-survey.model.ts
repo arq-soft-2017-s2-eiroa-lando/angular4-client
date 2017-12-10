@@ -15,11 +15,14 @@ export class NewSurvey{
 export class Subject{
   name: string = "";
   classes : Class[] = [];
-  options : string[] = [];
+  options : string[] = ["No voy a cursar", "Ya aprobé"];
 
   isValid() : boolean{
     return (this.name != null && this.name && this.classes.length > 0
       && this.options.length > 0);
+  }
+
+  constructor() {
   }
 }
 

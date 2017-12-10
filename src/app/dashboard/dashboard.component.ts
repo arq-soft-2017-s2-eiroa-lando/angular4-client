@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../service/surveys.service';
-import { ConfigService } from './configuration.service';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-root',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
-  providers: [ConfigService],
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
   dashboardData : any;
@@ -14,36 +13,60 @@ export class DashboardComponent implements OnInit {
   pieChartData : number[];
   pieChartType : string;
   completionPercentage : number;
+  canDraw = false;
 
-  columns = [
-    { key: 'subject', title: 'Materia' },
-    { key: 'name', title: 'Comision' },
-    { key: 'schedule', title: 'Horarios' },
-    { key: 'enrolled', title: 'Inscriptos' },
-    { key: 'size', title: 'Cupo'}
-  ];
-  data = [];
-  configuration;
+  settings = {
+    columns: {
+      name: {
+        title: 'Comision',
+        editable: false
+      },
+      subject: {
+        title: 'Materia',
+        editable: false
+      },
+      enrolled: {
+        title: 'Inscriptos',
+        filter: false,
+        editable: false
+      },
+      size: {
+        title: 'Cupo',
+        filter: false,
+        editable: false
+      }
+    },
+    actions: {
+      add: false,
+      edit: false,
+      delete: false
+    }
+  };
 
-  constructor(
-    private surveyService: SurveyService,
-  ){ }
+  data : LocalDataSource;
 
-  ngOnInit(): void {
-    this.dashboardData = this.surveyService.getSurveyStatistics();
+  constructor(private surveyService: SurveyService){
+    this.data = new LocalDataSource();
+    this.surveyService.getSurveyStatistics().then( r => this.initializeDashboard(r) );
+  }
+
+  ngOnInit(): void { }
+
+  initializeDashboard(response) : void{
+    this.data.load(response.classes);
+
+    this.dashboardData = response;
     this.pieChartLabels = ['No completadas', 'Completadas'];
     this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
     this.pieChartType = "pie";
     this.dashboardData.classes.sort( (s1,s2) => s1.enrolled - s2.enrolled );
-    this.configuration = ConfigService.config;
-    this.data = this.dashboardData.classes;
     this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
+
+    this.canDraw = true;
   }
 
-  getCellColor(enrolled, size): string{
-    if( enrolled > size) return "crimson"
-    if( enrolled / size > 0.8  ) return "darkorange"
+  canDrawChart() : boolean{
+    return this.canDraw;
   }
-
 
 }

@@ -9,11 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { FormsModule }   from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
-import { TableModule } from 'ngx-easy-table';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './service/login.service';
 import { LoginGuard } from './guard/login.guard';
 import { MenuComponent } from './menu/menu.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { MenuComponent } from './menu/menu.component';
     AppRoutingModule,
     FormsModule,
     ChartsModule,
-    TableModule
+    Ng2SmartTableModule
   ],
   providers: [
     SurveyService,

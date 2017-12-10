@@ -1,45 +1,32 @@
 <app-menu></app-menu>
 
-<div class="alert alert-danger" role="alert"> <!--[hidden]="dashboardData"-->
+<div class="alert alert-danger" role="alert" [hidden]="dashboardData">
   <b class="text-justify">No hay ninguna encuesta activa. <a routerLink="/new-survey" routerLinkActive="active">Crear una encuesta</a> </b>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" [hidden]="!dashboardData">
   <div class="row justify-content-between">
     <div class="text-center col-9">
-      <h1>{{dashboardData.title}}</h1>
+      <h1>{{dashboardData?.title}}</h1>
     </div>
-    <div class="col-3 my-auto">
+    <!-- <div class="col-3 my-auto">
       <button type="button" class="btn btn-primary" [disabled]="true">
         Modificar encuesta
       </button>
       <button type="button" class="btn btn-primary" [disabled]="true">
         Cerrar encuesta
       </button>
-    </div>
+    </div> -->
   </div>
 
   <div class="row">
 
     <div class="col-8">
-      <small class="pull-right help-text"><b>*Clickear en los encabezados para ordenar las columnas.</b></small><br>
-      <ngx-table
-        [configuration]="configuration"
-        [data]="data"
-        [columns]="columns">
-        <ng-template let-row >
-          <td>{{row.subject}}</td>
-          <td>{{row.name}}</td>
-          <td>{{row.schedule}}</td>
-          <td [style.backgroundColor]="getCellColor(row.enrolled, row.size)">{{row.enrolled}}</td>
-          <td>{{row.size}}</td>
-        </ng-template>
-
-      </ngx-table>
+      <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
     </div>
 
 
-    <div style="display: block" class="col-4 text-center">
+    <div style="display: block" class="col-4 text-center" *ngIf="canDrawChart()">
       <span><b>{{completionPercentage | number : '1.0-0'}}% de encuestas completadas</b></span>
       <canvas baseChart
         [data]="pieChartData"

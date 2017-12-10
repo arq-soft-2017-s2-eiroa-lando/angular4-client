@@ -156,26 +156,9 @@
                           <div *ngFor="let option of newSubject.options">
                             <li class="list-group-item justify-content-between">
                               {{option}}
-                              <span>
-                                <i (click)="editoption(option)"
-                                  class="btn btn-sm btn-link fa fa-pencil">
-                                  </i>
-                                <i (click)="removeOption(option)"
-                                  class="btn btn-sm btn-link fa fa-trash-o">
-                                </i>
-                              </span>
                             </li>
                           </div>
                           <br />
-                             <div class="input-group">
-                               <input type="text" class="form-control" placeholder="Ingrese nueva pregunta..."
-                                [(ngModel)]="newOption" name="newOption">
-                               <span class="input-group-btn" (click)="saveOption()">
-                                 <button class="btn btn-info" type="submit" [hidden]="isEmptyOption()">
-                                     <i class="fa fa-plus-circle" ></i>
-                                 </button>
-                               </span>
-                             </div>
                         </div>
                       </div>
                     </div>

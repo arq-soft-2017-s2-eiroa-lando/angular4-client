@@ -9,7 +9,7 @@ export class SurveyService{
   private headers = new Headers({'Content-Type': 'application/json'});
   private baseUrl = "http://localhost:8080/";
   private surveyStatistics = {
-    title : "1er cuatrimestre 2018",
+    period : "1er cuatrimestre 2018",
     totalSurveys : "734",
     surveysCompleted : "482",
     classes : [
@@ -103,7 +103,10 @@ export class SurveyService{
   constructor(private http: Http) { }
 
   getSurveyStatistics() : any{
-    return this.surveyStatistics;
+    return this.http.get(this.baseUrl + "api/survey/statistics")
+      .toPromise()
+      .then(response => response.json() )
+      .catch( this.handleError );
   }
 
   saveSurvey(survey): Promise<void>{
