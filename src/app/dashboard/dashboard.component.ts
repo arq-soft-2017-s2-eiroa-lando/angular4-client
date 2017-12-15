@@ -53,16 +53,19 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void { }
 
   initializeDashboard(response) : void{
-    this.data.load(response.classes);
+    if(response !== null){
 
-    this.dashboardData = response;
-    this.pieChartLabels = ['No completadas', 'Completadas'];
-    this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
-    this.pieChartType = "pie";
-    this.dashboardData.classes.sort( (s1,s2) => s1.enrolled - s2.enrolled );
-    this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
+      this.data.load(response.classes);
 
-    this.canDraw = true;
+      this.dashboardData = response;
+      this.pieChartLabels = ['No completadas', 'Completadas'];
+      this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
+      this.pieChartType = "pie";
+      this.dashboardData.classes.sort( (s1,s2) => s1.enrolled - s2.enrolled );
+      this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
+
+      this.canDraw = true;
+    }
   }
 
   canDrawChart() : boolean{
