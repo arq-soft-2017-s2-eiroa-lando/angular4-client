@@ -1,6 +1,6 @@
-export class NewSurvey{
-
-  period : string;
+export class NewSurvey {
+  id: number;
+  period: string;
   comment: string;
   subjects : Subject[] = [];
   showClassForm : boolean;

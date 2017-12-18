@@ -1,7 +1,8 @@
 <app-menu></app-menu>
 
 <div class="alert alert-danger" role="alert" [hidden]="dashboardData">
-  <b class="text-justify">No hay ninguna encuesta activa. <a routerLink="/new-survey" routerLinkActive="active">Crear una encuesta</a> </b>
+  <b class="text-justify">No hay ninguna encuesta activa.
+    <a routerLink="/new-survey" routerLinkActive="active" class="btn btn-success">Crear una encuesta</a> </b>
 </div>
 
 <div class="container-fluid" [hidden]="!dashboardData">
@@ -26,6 +27,16 @@
         [chartType]="pieChartType">
       </canvas>
     </div>
+
+<!--    <div > <h2>Encuestas </h2>
+      <tbody>
+
+      <tr *ngFor="let survey of surveys">
+        <td>{{survey.period}}</td>
+        <td><a class="btn-link" routerLink="/survey">Ver detalle</a></td>
+      </tr>
+
+    </div>-->
 
   </div>
 

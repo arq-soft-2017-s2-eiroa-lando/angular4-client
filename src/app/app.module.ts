@@ -7,13 +7,15 @@ import { SurveyComponent } from './survey/survey.component';
 import { SurveyService,  } from './service/surveys.service';
 import { AppRoutingModule } from './app-routing.module';
 import { NewSurveyComponent } from './new-survey/new-survey.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './service/login.service';
 import { LoginGuard } from './guard/login.guard';
 import { MenuComponent } from './menu/menu.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import {HttpClientModule} from '@angular/common/http';
+import { NguiPopupModule } from '@ngui/popup';
 
 
 @NgModule({
@@ -28,10 +30,12 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ChartsModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    NguiPopupModule
   ],
   providers: [
     SurveyService,

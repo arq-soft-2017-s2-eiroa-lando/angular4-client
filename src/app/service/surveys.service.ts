@@ -1,13 +1,16 @@
 import { Injectable, Inject, OnInit } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {Observable} from "rxjs/Observable";
+import {NewSurvey} from "../new-survey/new-survey.model";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class SurveyService{
 
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private httpClient: HttpClient) { }
 
   getSurveyStatistics() : any{
     return this.http.get(this.baseUrl() + "api/survey/statistics")
@@ -24,7 +27,10 @@ export class SurveyService{
 
   baseUrl(): string {
     // if( document.location.href.indexOf("localhost") === -1 ){
-      return "https://52.11.222.208:8443/";
+     // return "https://52.11.222.208:8443/";
+   // console.log(document.location.href.indexOf("localhost"))
+    // if( document.location.href.indexOf("localhost") == -1 ){
+      return "http://localhost:8080/";
     // }
     // return "https://localhost:8443/";
   }
@@ -46,6 +52,11 @@ export class SurveyService{
                .toPromise()
                .then(response => response.json() )
                .catch(this.handleError);
+  }
+
+
+  getSurveys(): Observable<NewSurvey[]> {
+    return this.httpClient.get<NewSurvey[]>(this.baseUrl() + 'api/survey/all');
   }
 
   private handleError(error: any): Promise<any> {

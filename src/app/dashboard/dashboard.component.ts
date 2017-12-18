@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SurveyService } from '../service/surveys.service';
-import { LocalDataSource } from 'ng2-smart-table';
+import {Component, OnInit} from '@angular/core';
+import {SurveyService} from '../service/surveys.service';
+import {LocalDataSource} from 'ng2-smart-table';
+import {NewSurvey} from '../new-survey/new-survey.model';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,14 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  dashboardData : any;
-  pieChartLabels : string[];
-  pieChartData : number[];
-  pieChartType : string;
-  completionPercentage : number;
+  dashboardData: any;
+  pieChartLabels: string[];
+  pieChartData: number[];
+  pieChartType: string;
+  completionPercentage: number;
   canDraw = false;
+
+  surveys: NewSurvey[];
 
   settings = {
     columns: {
@@ -43,17 +46,26 @@ export class DashboardComponent implements OnInit {
     }
   };
 
-  data : LocalDataSource;
+  data: LocalDataSource;
 
-  constructor(private surveyService: SurveyService){
-    this.data = new LocalDataSource();
-    this.surveyService.getSurveyStatistics().then( r => this.initializeDashboard(r) );
+  ngOnInit(): void {
+    /*this.surveyService.getSurveys().subscribe(
+      maybeSurveys => this.replaceSurveys(maybeSurveys)
+    )*/
+    this.surveyService.getSurveyStatistics().then(r => this.initializeDashboard(r));
   }
 
-  ngOnInit(): void { }
+  replaceSurveys(items: NewSurvey[]): void {
+    this.surveys = items;
+    console.log(items);
+  }
 
-  initializeDashboard(response) : void{
-    if(response !== null){
+  constructor(private surveyService: SurveyService) {
+    this.data = new LocalDataSource();
+  }
+
+  initializeDashboard(response): void {
+    if (response !== null) {
 
       this.data.load(response.classes);
 
@@ -61,14 +73,14 @@ export class DashboardComponent implements OnInit {
       this.pieChartLabels = ['No completadas', 'Completadas'];
       this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
       this.pieChartType = "pie";
-      this.dashboardData.classes.sort( (s1,s2) => s1.enrolled - s2.enrolled );
+      this.dashboardData.classes.sort((s1, s2) => s1.enrolled - s2.enrolled);
       this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
 
       this.canDraw = true;
     }
   }
 
-  canDrawChart() : boolean{
+  canDrawChart(): boolean {
     return this.canDraw;
   }
 

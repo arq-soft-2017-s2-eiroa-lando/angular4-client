@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { SurveyService } from '../service/surveys.service';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NguiMessagePopupComponent, NguiPopupComponent} from "@ngui/popup";
 
 @Component({
   selector: 'survey',
@@ -13,15 +14,32 @@ export class SurveyComponent implements OnInit {
   canSubmit : boolean;
   surveyHash : string;
 
+  @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
+
   constructor(
     private surveyService: SurveyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ){ }
 
   ngOnInit(): void {
     this.surveyHash = this.route.snapshot.paramMap.get('id');
     this.survey = this.surveyService.getSurvey(this.surveyHash)
       .then(s => this.initialize(s) );
+  }
+
+  openConfirmationPopup() {
+    this.popup.open(NguiMessagePopupComponent, {
+        title: 'Respuesta enviada',
+        message: 'La encuesta ha sido correctamente contestada, puede volver a editar sus respuesta si lo desea',
+        closeButton: false,
+        buttons: {
+          OK: () => {
+            return this.router.navigateByUrl('/');
+          }
+        }
+      }
+    );
   }
 
   initialize(survey) : void{
@@ -40,8 +58,9 @@ export class SurveyComponent implements OnInit {
     console.log(this.answers)
     if(this.isFormValid()){
       this.surveyService.saveAnswer(this.surveyHash, this.answers).then(
-        () => console.log("Answer submitted")
-      )
+        () => {console.log("Answer submitted");
+          this.openConfirmationPopup(); }
+      );
     }
   }
 
