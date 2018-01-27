@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {NewSurvey, Subject, Class} from './new-survey.model';
 import {SurveyService} from '../service/surveys.service';
-import {NguiMessagePopupComponent, NguiPopupComponent} from '@ngui/popup';
 import {Router} from '@angular/router';
 
 @Component({
@@ -12,7 +11,6 @@ import {Router} from '@angular/router';
 })
 export class NewSurveyComponent implements OnInit {
 
-  @ViewChild(NguiPopupComponent) popup: NguiPopupComponent;
   newSurvey: NewSurvey;
   newSubject: Subject;
   newClass: Class;
@@ -31,21 +29,6 @@ export class NewSurveyComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  openConfirmationPopup() {
-    this.popup.open(NguiMessagePopupComponent, {
-        title: 'Creación confirmada',
-        message: 'La encuesta ha sido correctamente creada y activada, presione ok para ser redirigido al dashboard',
-        closeButton: false,
-        buttons: {
-          OK: () => {
-            return this.router.navigateByUrl('dashboard');
-          }
-        }
-      }
-    );
-  }
-
 
   isValid(): boolean {
     return this.newSurvey.isValid();
@@ -67,7 +50,6 @@ export class NewSurveyComponent implements OnInit {
     this.surveyService.saveSurvey(this.newSurvey).then(
       () => {
         console.log("Survey submitted");
-        this.openConfirmationPopup();
       }
     );
   }

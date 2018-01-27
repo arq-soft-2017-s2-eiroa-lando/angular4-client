@@ -15,7 +15,6 @@ import { LoginGuard } from './guard/login.guard';
 import { MenuComponent } from './menu/menu.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {HttpClientModule} from '@angular/common/http';
-import { NguiPopupModule } from '@ngui/popup';
 
 
 @NgModule({
@@ -34,8 +33,7 @@ import { NguiPopupModule } from '@ngui/popup';
     AppRoutingModule,
     FormsModule,
     ChartsModule,
-    Ng2SmartTableModule,
-    NguiPopupModule
+    Ng2SmartTableModule
   ],
   providers: [
     SurveyService,

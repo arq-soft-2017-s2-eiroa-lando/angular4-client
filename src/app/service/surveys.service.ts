@@ -27,7 +27,7 @@ export class SurveyService{
 
   baseUrl(): string {
     // if( document.location.href.indexOf("localhost") === -1 ){
-      return "https://52.11.222.208:8443/";
+      return "http://52.11.222.208:8443/";
    // console.log(document.location.href.indexOf("localhost"))
     // if( document.location.href.indexOf("localhost") == -1 ){
      // return "http://localhost:8080/";
