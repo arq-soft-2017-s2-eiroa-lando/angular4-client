@@ -26,13 +26,8 @@ export class SurveyService{
   }
 
   baseUrl(): string {
-    // if( document.location.href.indexOf("localhost") === -1 ){
-      return "http://52.11.222.208:8443/";
-   // console.log(document.location.href.indexOf("localhost"))
-    // if( document.location.href.indexOf("localhost") == -1 ){
-     // return "http://localhost:8080/";
-    // }
-    // return "https://localhost:8443/";
+      // return "http://52.11.222.208:8443/";
+     return "http://localhost:8080/";
   }
 
   saveSurvey(survey): Promise<void>{
@@ -54,10 +49,9 @@ export class SurveyService{
                .catch(this.handleError);
   }
 
-
-  getSurveys(): Observable<NewSurvey[]> {
-    return this.httpClient.get<NewSurvey[]>(this.baseUrl() + 'api/survey/all');
-  }
+  // getSurveys(): Observable<NewSurvey[]> {
+  //   return this.httpClient.get<NewSurvey[]>(this.baseUrl() + 'api/survey/all');
+  // }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

@@ -45,7 +45,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nueva materia</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{modalTitle}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -53,14 +53,15 @@
               <div class="modal-body">
                 <div class="row justify-content-center">
                   <form class="col-9">
-                    <div class="form-group">
+                    <div class="form-group" [hidden]="newSurvey.showClassForm">
                       <label><b>Nombre</b></label>
-                      <input type="text" name="newSubjectName" class="form-control" [(ngModel)]="newSubject.name" placeholder="Ingrese el nombre de la materia">
+                      <input type="text" name="newSubjectName" class="form-control"
+                         [(ngModel)]="newSubject.name" placeholder="Ingrese el nombre de la materia">
                     </div>
                     <hr />
-                    <div>
+                    <div [hidden]="newSurvey.showClassForm">
                       <label><b>Comisiones</b></label>
-                      <button (click)="newSurvey.showClassForm = true" type="button"
+                      <button (click)="showClassForm()" type="button"
                               class="btn btn-sm btn-link float-right">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                       </button>
@@ -70,7 +71,7 @@
                          class="list-group-item list-group-item-danger">
                          <b>No hay comisiones creadas para esta materia.</b>
                       </li>
-                      <div *ngFor="let class of newSubject.classes">
+                      <div *ngFor="let class of newSubject.classes" [hidden]="newSurvey.showClassForm">
                         <li class="list-group-item justify-content-between">
                           {{class.name}}
                           <span>
@@ -140,12 +141,15 @@
                             Guardar horario</button>
                         </form>
                       </div>
-                      <button type="submit" class="btn btn-sm btn-primary offset-md-4"
+                      <button type="submit" class="btn btn-sm btn-primary"
                         [hidden]="newClass.showScheduleForm" (click)="addClass()" [disabled]="!isNewClassValid()">
                         Guardar comisión</button>
+                      <button type="submit" class="btn btn-sm btn-primary"
+                        (click)="cancelAddClass()">
+                        Cancelar</button>
                     </form>
                     <hr />
-                    <div [hidden]="newSurvey.showClassForm">
+                    <div [hidden]="true"> <!-- Por ahora no se muestran las opciones por defecto porque no son editables -->
                       <div>
                         <label><b>Opciones</b></label>
                         <div class="list-group">

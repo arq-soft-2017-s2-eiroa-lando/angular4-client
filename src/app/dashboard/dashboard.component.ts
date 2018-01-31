@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   completionPercentage: number;
   canDraw = false;
 
-  surveys: NewSurvey[];
+  surveys: any[];
 
   settings = {
     columns: {
@@ -49,35 +49,24 @@ export class DashboardComponent implements OnInit {
   data: LocalDataSource;
 
   ngOnInit(): void {
-    /*this.surveyService.getSurveys().subscribe(
-      maybeSurveys => this.replaceSurveys(maybeSurveys)
-    )*/
-    this.surveyService.getSurveyStatistics().then(r => this.initializeDashboard(r));
-  }
-
-  replaceSurveys(items: NewSurvey[]): void {
-    this.surveys = items;
-    console.log(items);
+    this.surveyService.getSurveyStatistics().then(s => this.surveys = s);
   }
 
   constructor(private surveyService: SurveyService) {
     this.data = new LocalDataSource();
   }
 
-  initializeDashboard(response): void {
-    if (response !== null) {
+  loadStatistics(statistics): void {
+    this.data.load(statistics.classes);
 
-      this.data.load(response.classes);
+    this.dashboardData = statistics;
+    this.pieChartLabels = ['No completadas', 'Completadas'];
+    this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
+    this.pieChartType = "pie";
+    this.dashboardData.classes.sort((s1, s2) => s1.enrolled - s2.enrolled);
+    this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
 
-      this.dashboardData = response;
-      this.pieChartLabels = ['No completadas', 'Completadas'];
-      this.pieChartData = [this.dashboardData.totalSurveys - this.dashboardData.surveysCompleted, this.dashboardData.surveysCompleted];
-      this.pieChartType = "pie";
-      this.dashboardData.classes.sort((s1, s2) => s1.enrolled - s2.enrolled);
-      this.completionPercentage = 100 * (this.dashboardData.surveysCompleted / this.dashboardData.totalSurveys)
-
-      this.canDraw = true;
-    }
+    this.canDraw = true;
   }
 
   canDrawChart(): boolean {

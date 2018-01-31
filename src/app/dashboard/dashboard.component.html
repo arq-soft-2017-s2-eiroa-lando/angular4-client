@@ -1,14 +1,22 @@
 <app-menu></app-menu>
-
-<div class="alert alert-danger" role="alert" [hidden]="dashboardData">
-  <b class="text-justify">No hay ninguna encuesta activa.
-    <a routerLink="/new-survey" routerLinkActive="active" class="btn btn-success">Crear una encuesta</a> </b>
+<a routerLink="/new-survey" routerLinkActive="active" class="btn btn-success">Crear una encuesta</a>
+<div class="alert alert-danger" role="alert" [hidden]="surveys?.length > 0">
+  <b class="text-justify">No hay ninguna encuesta activa.</b>
 </div>
+<div [hidden]="surveys?.length == 0">
+  <h2>Encuestas:</h2>
+  <div class="list-group">
+    <div *ngFor="let s of surveys">
+      <a (click)="loadStatistics(s)" class="list-group-item list-group-item-action">{{s.period}}</a>
+    </div>
+  </div>
+</div>
+
 
 <div class="container-fluid" [hidden]="!dashboardData">
   <div class="row justify-content-between">
     <div class="text-center col-9">
-      <h1>{{dashboardData?.title}}</h1>
+      <h1>{{dashboardData?.period}}</h1>
     </div>
   </div>
 
@@ -27,16 +35,6 @@
         [chartType]="pieChartType">
       </canvas>
     </div>
-
-<!--    <div > <h2>Encuestas </h2>
-      <tbody>
-
-      <tr *ngFor="let survey of surveys">
-        <td>{{survey.period}}</td>
-        <td><a class="btn-link" routerLink="/survey">Ver detalle</a></td>
-      </tr>
-
-    </div>-->
 
   </div>
 

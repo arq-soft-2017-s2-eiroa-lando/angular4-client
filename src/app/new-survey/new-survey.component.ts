@@ -18,6 +18,7 @@ export class NewSurveyComponent implements OnInit {
   canSubmit: boolean;
   newOption: string;
   message2: string;
+  modalTitle: string;
   @ViewChild('closeModalBtn') closeModalBtn: ElementRef;
   @ViewChild('editSubjectBtn') editSubjectBtn: ElementRef;
 
@@ -25,6 +26,7 @@ export class NewSurveyComponent implements OnInit {
     this.newSurvey = new NewSurvey();
     this.newSubject = new Subject();
     this.newClass = new Class();
+    this.modalTitle = "Nueva materia"
   }
 
   ngOnInit() {
@@ -49,7 +51,7 @@ export class NewSurveyComponent implements OnInit {
   submitSurvey(): void {
     this.surveyService.saveSurvey(this.newSurvey).then(
       () => {
-        console.log("Survey submitted");
+        this.router.navigate(['dashboard'])
       }
     );
   }
@@ -60,7 +62,19 @@ export class NewSurveyComponent implements OnInit {
       this.newSurvey.showClassForm = false;
       this.newSubject.options.push("Cursaría en " + this.newClass.name);
       this.newClass = new Class();
+      this.modalTitle = "Nueva materia"
     }
+  }
+
+  cancelAddClass(): void {
+    this.newSurvey.showClassForm = false;
+    this.newClass = new Class();
+    this.modalTitle = "Nueva materia"
+  }
+
+  showClassForm(): void {
+    this.newSurvey.showClassForm = true;
+    this.modalTitle = "Nueva comisión"
   }
 
   removeClass(aClass): void {
