@@ -38,10 +38,10 @@ export class SurveyComponent implements OnInit {
   }
 
   submitSurvey(): void {
-    console.log(this.answers)
     if(this.isFormValid()){
       this.surveyService.saveAnswer(this.surveyHash, this.answers).then(
-        () => {console.log("Answer submitted");
+        () => {
+            this.router.navigate(['survey-submitted'])
            }
       );
     }

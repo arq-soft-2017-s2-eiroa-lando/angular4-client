@@ -10,6 +10,7 @@ export class LoginService {
   constructor(private router :Router) {}
 
   isUserLoggedIn() : boolean{
+    console.log("Logged in? " + this.isLoggedIn)
     return this.isLoggedIn
   }
 
@@ -17,8 +18,6 @@ export class LoginService {
     if(u == "admin" && p == "admin"){
       this.isLoggedIn = true;
       this.router.navigate(['dashboard'])
-    }else{
-      console.log("wrong attempt")
     }
   }
 }

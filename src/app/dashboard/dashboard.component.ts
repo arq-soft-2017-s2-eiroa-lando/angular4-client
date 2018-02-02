@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SurveyService} from '../service/surveys.service';
 import {LocalDataSource} from 'ng2-smart-table';
 import {NewSurvey} from '../new-survey/new-survey.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.surveyService.getSurveyStatistics().then(s => this.surveys = s);
   }
 
-  constructor(private surveyService: SurveyService) {
+  constructor(private surveyService: SurveyService, private router: Router) {
     this.data = new LocalDataSource();
   }
 
@@ -71,6 +72,10 @@ export class DashboardComponent implements OnInit {
 
   canDrawChart(): boolean {
     return this.canDraw;
+  }
+
+  viewSurveys(): void {
+    this.router.navigate(['survey-ids/'+this.dashboardData.surveyID])
   }
 
 }

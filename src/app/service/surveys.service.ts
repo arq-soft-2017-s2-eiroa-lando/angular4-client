@@ -36,6 +36,13 @@ export class SurveyService{
       .catch(this.handleError);
   }
 
+  getSurveyIDS(id): Promise<any>{
+    return this.http.get(this.baseUrl() + "api/survey/student-surveys/" + id )
+               .toPromise()
+               .then(response => response.json() )
+               .catch(this.handleError);
+  }
+
   saveAnswer(hash, answers) : Promise<void>{
     return this.http.post(this.baseUrl() + "api/survey/answer/" + hash, answers, {headers: this.headers})
       .toPromise().then(() => null )

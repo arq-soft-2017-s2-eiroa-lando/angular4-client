@@ -4,16 +4,19 @@
   <b class="text-justify">No hay ninguna encuesta activa.</b>
 </div>
 <div [hidden]="surveys?.length == 0">
-  <h2>Encuestas:</h2>
-  <div class="list-group">
-    <div *ngFor="let s of surveys">
-      <a (click)="loadStatistics(s)" class="list-group-item list-group-item-action">{{s.period}}</a>
+  <h2 class="text-center">Encuestas:</h2>
+
+    <div class="list-group list-group-item-action col-3 offset-1">
+      <div *ngFor="let s of surveys">
+        <a (click)="loadStatistics(s)" class="list-group-item list-group-item-action">{{s.period}}</a>
+      </div>
     </div>
-  </div>
+
 </div>
 
 
 <div class="container-fluid" [hidden]="!dashboardData">
+  <hr />
   <div class="row justify-content-between">
     <div class="text-center col-9">
       <h1>{{dashboardData?.period}}</h1>
@@ -26,7 +29,6 @@
       <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
     </div>
 
-
     <div style="display: block" class="col-4 text-center" *ngIf="canDrawChart()">
       <span><b>{{completionPercentage | number : '1.0-0'}}% de encuestas completadas</b></span>
       <canvas baseChart
@@ -35,7 +37,7 @@
         [chartType]="pieChartType">
       </canvas>
     </div>
-
+    <button type="button" (click)="viewSurveys()" class="btn btn-link">Ver encuestas</button>
   </div>
 
 </div>

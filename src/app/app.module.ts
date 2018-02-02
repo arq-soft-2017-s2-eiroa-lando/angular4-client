@@ -15,6 +15,8 @@ import { LoginGuard } from './guard/login.guard';
 import { MenuComponent } from './menu/menu.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {HttpClientModule} from '@angular/common/http';
+import { SurveyIdsComponent } from './survey-ids/survey-ids.component';
+import { SurveyCompletedComponent } from './survey-completed/survey-completed.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import {HttpClientModule} from '@angular/common/http';
     SurveyComponent,
     NewSurveyComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    SurveyIdsComponent,
+    SurveyCompletedComponent
   ],
   imports: [
     BrowserModule,
