@@ -26,8 +26,8 @@ export class SurveyService{
   }
 
   baseUrl(): string {
-      // return "http://52.11.222.208:8443/";
-     return "http://localhost:8080/";
+      return "http://52.11.222.208:8443/";
+     // return "http://localhost:8080/";
   }
 
   saveSurvey(survey): Promise<void>{
