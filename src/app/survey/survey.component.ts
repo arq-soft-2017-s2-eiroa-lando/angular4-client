@@ -49,11 +49,13 @@ export class SurveyComponent implements OnInit {
 
   private isFormValid(): boolean {
     for(let answer of this.answers ) {
-      if(answer.option === "" || answer.option === "Seleccionar opción"){
+      console.log("one answer")
+      console.log(answer.option)
+      if(answer.option === "" || answer.option === "Seleccionar opción" || answer.option == null){
         return false;
       }
     }
-    return true;
+    return true
   }
 }
 
